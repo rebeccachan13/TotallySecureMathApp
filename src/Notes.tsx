@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert, SafeAreaView, ScrollView } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+// import AsyncStorage from '@react-native-async-storage/async-storage'; // Insecure storage method
+import EncryptedStorage from 'react-native-encrypted-storage'; // Secure storage library
 import Note from './components/Note';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { TRootStackParamList } from './App';
@@ -49,7 +50,9 @@ export default class Notes extends React.Component<TProps, IState> {
 	private async getStoredNotes(): Promise<INote[]> {
 		const suffix = this.props.route.params.user.username + '-' + this.props.route.params.user.password;
 
-		const value = await AsyncStorage.getItem('notes-' + suffix);
+		//const value = await AsyncStorage.getItem('notes-' + suffix);
+		// Retrieving notes securely using EncryptedStorage
+		const value = await EncryptedStorage.getItem('notes-' + suffix);
 
 		if (value !== null) {
 			return JSON.parse(value);
@@ -62,7 +65,9 @@ export default class Notes extends React.Component<TProps, IState> {
 		const suffix = this.props.route.params.user.username + '-' + this.props.route.params.user.password;
 
 		const jsonValue = JSON.stringify(notes);
-		await AsyncStorage.setItem('notes-' + suffix, jsonValue);
+		//await AsyncStorage.setItem('notes-' + suffix, jsonValue);
+		// Storing notes securely using EncryptedStorage
+		await EncryptedStorage.setItem('notes-' + suffix, jsonValue);
 	}
 
 	private onNoteTitleChange(value: string) {
