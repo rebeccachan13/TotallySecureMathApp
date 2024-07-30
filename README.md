@@ -14,8 +14,9 @@ This document offers a thorough security assessment of the Totally Secure Math a
 
 Insecure data storage occurs when sensitive information, such as user credentials or personal information, is not securely stored. This might include storing data in plain text or using weak encryption methods. Such practices can lead to unauthorized access to sensitive data, resulting in data breaches, privacy violations, loss of user trust, and potential legal consequences.
 
+**Issue Identified:** Initially, the app was using **AsyncStorage** to store sensitive data. Since **AsyncStorage** does not offer encryption, this exposed user information to potential security threats
 
-
+**Solution Implemented:** To address this, we replaced **AsyncStorage** with **EncryptedStorage**. This changes ensures that all sensitive data is encrypted and securely stored, providing better protection against unauthorized access and significantly enhancing the app's overall security.
 
 ## Importance of Security Measures
 
@@ -26,9 +27,6 @@ Implementing these security measures is crucial for safeguarding the app and its
 - Protects sensitive information from unauthorized access and breaches
 - Ensures compliance with data protection regulations and standards
 - Enhance user trust and confidence in the application's security
-
-
-
 
 ## Reflection and Lessons Learned
 
