@@ -17,7 +17,7 @@ Insecure data storage occurs when sensitive information, such as user credential
 **Issue Identified:** Initially, the app was using **AsyncStorage** to store sensitive data. Since **AsyncStorage** does not offer encryption, this exposed user information to potential security threats
 
 **Solution Implemented:** To address this, we replaced **AsyncStorage** with **EncryptedStorage**. This changes ensures that all sensitive data is encrypted and securely stored, providing better protection against unauthorized access and significantly enhancing the app's overall security.
---
+_________
 
 ### Code Injection
 
@@ -26,7 +26,7 @@ Code injection happens when untrusted data is added to a program and run as if i
 **Issue Identified:** Initially, the app used the **eval()** function to evaluate user-input mathematical equations in the Note component. Due to **eval()**'s ability to run any JavaScript code, the application was vulnerable to code injection threats.
 
 **Solution Implemented:** In order to solve this, we used a regular expression to do input validation, making sure that the equation only contains legitimate mathematical characters. We also used the **Function** constructor to replace **eval()** with a safer evaluation technique. With these modifications, the risk of code injection attacks is greatly reduced, as only valid mathematical expressions are allowed and the execution environment is safer.
---
+_________
 
 ## Importance of Security Measures
 
