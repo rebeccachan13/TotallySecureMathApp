@@ -7,10 +7,25 @@ interface IProps {
 }
 
 function Note(props: IProps) {
+	// Evaluate the equation in a safer way without using eval
 	function evaluateEquation() {
-		const result = eval(props.text);
+		//const result = eval(props.text); // Insecure way to evaluate the equation
 
-		Alert.alert('Result', 'Result: ' + result);
+		// Evaluate the equation in a safer way without using eval
+		const safeEquationRegex = /^[0-9+\-*/().'\s]+$/; 
+
+		if (!safeEquationRegex.test(props.text)) {
+            Alert.alert('Error', 'Invalid equation. Please use only numbers and basic math operators.');
+            return;
+        }
+
+		try {
+            // Using Function constructor instead of eval for slightly safer evaluation
+            const result = new Function('return ' + props.text)();
+            Alert.alert('Result', 'Result: ' + result);
+        } catch (error) {
+            Alert.alert('Error', 'Unable to evaluate the equation. Please check your input.');
+        }
 	}
 
 	return (
