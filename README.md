@@ -17,7 +17,22 @@ Insecure data storage occurs when sensitive information, such as user credential
 **Issue Identified:** Initially, the app was using **AsyncStorage** to store sensitive data. Since **AsyncStorage** does not offer encryption, this exposed user information to potential security threats
 
 **Solution Implemented:** To address this, we replaced **AsyncStorage** with **EncryptedStorage**. This changes ensures that all sensitive data is encrypted and securely stored, providing better protection against unauthorized access and significantly enhancing the app's overall security.
-_________
+
+---
+
+### Improper Authentication
+
+Improper authentication occurs when an application fails to properly authenticate a user's identity. This can include things like keeping user credentials in plain text, utilizing insecure or obsolete authentication systems, or failing to adopt precautions to prevent brute-force assaults. These flaws can allow unauthorized access to the application, compromising of user data, and potentially serious security breaches.
+
+**Issue Identified:** Initially, the software used plain text storage for passwords and hardcoded user credentials, posing severe security issues. Storing passwords in plain text is a significant risk since it allows attackers who obtain access to the storage to simply retrieve user passwords. Furthermore, the usage of hardcoded credentials can lead to unlawful access if they are detected.
+
+**Solution Implemented:**
+
+- Password Hashing and Salting: Passwords are now hashed using SHA-256 combined with a unique salt for each user, ensuring secure storage.
+- Secure Salt Generation: Used **react-native-randombytes** to generate unique salts, enhancing password security.
+- Secure Password Verification: During login, the entered password is hashed with the stored salt and compared with the stored hashed password to verify the user's identity.
+
+---
 
 ### Code Injection
 
@@ -26,7 +41,8 @@ Code injection happens when untrusted data is added to a program and run as if i
 **Issue Identified:** Initially, the app used the **eval()** function to evaluate user-input mathematical equations in the Note component. Due to **eval()**'s ability to run any JavaScript code, the application was vulnerable to code injection threats.
 
 **Solution Implemented:** In order to solve this, we used a regular expression to do input validation, making sure that the equation only contains legitimate mathematical characters. We also used the **Function** constructor to replace **eval()** with a safer evaluation technique. With these modifications, the risk of code injection attacks is greatly reduced, as only valid mathematical expressions are allowed and the execution environment is safer.
-_________
+
+---
 
 ## Importance of Security Measures
 
@@ -37,6 +53,12 @@ Implementing these security measures is crucial for safeguarding the app and its
 - Protects sensitive information from unauthorized access and breaches
 - Ensures compliance with data protection regulations and standards
 - Enhance user trust and confidence in the application's security
+
+**Improper Authentication:**
+
+- Ensures that only authorized users have access to the program, safeguarding user data and resources.
+- Ensures that the application works as intended without being hijacked for nefarious reasons.
+- Improves overall application security by lowering the risk of successful assaults.
 
 **Code Injection:**
 
@@ -53,6 +75,13 @@ Through this security assessment, we learned the importance of implementing robu
 - Avoid storing sensitive data in plain text or using hardcoded credentials
 - Implement secure storage solutions for sensitive data, such as secure file storage systems or encrypted databases
 - Ensure compliance with data protection standards and regulations to protect user privacy and data integrity
+
+**Improper Authentication:**
+
+- Passwords should not be stored in plain text or used as hardcoded credentials.
+- Implement safe password storage by hashing passwords using a strong algorithm and unique salts.
+- Use safe mechanisms for salt generation, and guarantee that passwords are securely checked during authentication.
+- Increase user trust and security by implementing effective authentication procedures, lowering the risk of illegal access.
 
 **Code Injection:**
 
