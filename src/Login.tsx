@@ -19,6 +19,8 @@ interface IProps {
 
 type TProps = NativeStackScreenProps<TRootStackParamList, 'Login'> & IProps;
 
+
+
 // Function to hash passwords with a salt
 const hashPassword = async (password: string) => {
     const saltBuffer = randomBytes(16);
@@ -66,17 +68,26 @@ export default function Login(props: TProps) {
 			// 	foundUser = user;
 
 			// 	break;
+
+	const validateInput = (input:any) => {
+    const validInputRegex = /^[a-zA-Z0-9]+$/;
+    return validInputRegex.test(input);
+};
+
 	const login = async () => {
+		if (!validateInput(username) || !validateInput(password)) {
+			Alert.alert('Error', 'Invalid input. Please use only letters and numbers.');
+			return;
+		}
+	
 		let foundUser: IUser | false = false;
-		
 		for (const user of users) {
-			// Compare entered password with hashed password
-            if (username === user.username && await verifyPassword(password, user.salt, user.hashedPassword)) {
-                foundUser = user;
-                break;
+			if (username === user.username && await verifyPassword(password, user.salt, user.hashedPassword)) {
+				foundUser = user;
+				break;
 			}
 		}
-
+	
 		if (foundUser) {
 			props.onLogin(foundUser);
 		} else {

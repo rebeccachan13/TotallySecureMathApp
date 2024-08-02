@@ -42,6 +42,17 @@ Code injection happens when untrusted data is added to a program and run as if i
 
 **Solution Implemented:** In order to solve this, we used a regular expression to do input validation, making sure that the equation only contains legitimate mathematical characters. We also used the **Function** constructor to replace **eval()** with a safer evaluation technique. With these modifications, the risk of code injection attacks is greatly reduced, as only valid mathematical expressions are allowed and the execution environment is safer.
 
+### Insufficient input validation
+
+Insufficient input validation occurs when user input is not properly checked or sanitized, potentially leading to various vulnerabilities and incorrect application behavior. This can expose applications to security risks and affect functionality.
+
+**Issue Identified:** Initially, the app did not thoroughly validate user inputs such as usernames and passwords. This lack of validation could lead to improper handling of data and security risks, and user credentials were not adequately secured, leading to potential exposure of sensitive information.
+
+**Solution Implemented:**
+
+- Input Validation in **login.tsx**: We implemented robust validation to ensure that user inputs meet the required format and criteria before processing. This helps prevent invalid data from entering the system and ensures data integrity.
+- Hashing in **notes.tsx**: We used SHA-256 hashing to securely manage user credentials. Specifically, the hashed password was compared to the stored hashed value, which enhances security by ensuring that plain text passwords are not used directly. This process involves securely hashing the user's password and using this hashed value for comparisons and storage.
+
 ---
 
 ## Importance of Security Measures
@@ -66,6 +77,12 @@ Implementing these security measures is crucial for safeguarding the app and its
 - Ensures the application functions as intended without being hijacked for malicious purposes.
 - Enhances overall application security, reducing the risk of successful attacks
 
+**Insufficient input validation:**
+
+- Ensures that user inputs are properly checked and sanitized to prevent injection attacks and data corruption.
+- Reduces the risk of application instability and security breaches by rejecting invalid or malicious data.
+- Enhances overall application security and compliance with data protection standards.
+
 ## Reflection and Lessons Learned
 
 Through this security assessment, we learned the importance of implementing robust security practices:
@@ -88,3 +105,9 @@ Through this security assessment, we learned the importance of implementing robu
 - Never trust user input: it should always be verified and sanitized before processing or execution.
 - Avoid risky function like eval().
 - Implement thorough input validation and utilize safer alternatives for any necessary dynamic code execution.
+
+**Insufficient input validation:**
+
+- Always validate and sanitize user inputs to prevent invalid data and potential security threats.
+- Implement strict validation rules for all input fields to ensure only correct and expected data is accepted.
+- Regularly update validation mechanisms to address new security vulnerabilities and enhance overall application security.
