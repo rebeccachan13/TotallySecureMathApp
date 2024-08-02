@@ -42,6 +42,8 @@ Code injection happens when untrusted data is added to a program and run as if i
 
 **Solution Implemented:** In order to solve this, we used a regular expression to do input validation, making sure that the equation only contains legitimate mathematical characters. We also used the **Function** constructor to replace **eval()** with a safer evaluation technique. With these modifications, the risk of code injection attacks is greatly reduced, as only valid mathematical expressions are allowed and the execution environment is safer.
 
+---
+
 ### Insufficient input validation
 
 Insufficient input validation occurs when user input is not properly checked or sanitized, potentially leading to various vulnerabilities and incorrect application behavior. This can expose applications to security risks and affect functionality.
