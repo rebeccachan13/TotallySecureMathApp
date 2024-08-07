@@ -113,3 +113,56 @@ Through this security assessment, we learned the importance of implementing robu
 - Always validate and sanitize user inputs to prevent invalid data and potential security threats.
 - Implement strict validation rules for all input fields to ensure only correct and expected data is accepted.
 - Regularly update validation mechanisms to address new security vulnerabilities and enhance overall application security.
+- 
+
+## Secure Coding Practices
+
+As part of the project, we implemented several enhancements to ensure secure handling of sensitive data and improve overall application security. This involved addressing common insecure coding practices and implementing the following improvements:
+
+### 1. Secure Storage
+
+- **Implemented secure storage for API keys using `react-native-keychain`:**
+  - Sensitive data such as API keys are securely stored and retrieved using secure storage mechanisms.
+  - This prevents sensitive information from being exposed in the codebase.
+
+### 2. Input Validation
+
+- **Added input validation for user inputs:**
+  - A utility function `validateInput` was created to sanitize inputs by removing special characters.
+  - Ensures that all user-provided data is validated before processing to prevent injection attacks.
+
+### 3. Error Handling
+
+- **Improved error handling mechanisms:**
+  - Implemented try-catch blocks for network requests and critical operations.
+  - Errors are logged and handled gracefully, preventing information leakage.
+
+### 4. Access Control
+
+- **Enforced role-based access control for sensitive operations:**
+  - Ensured that only authorized users can perform sensitive actions.
+  - Role checks are in place to verify user permissions before executing restricted functions.
+
+### 5. Dependency Management
+
+- **Regularly audited project dependencies:**
+  - Utilized `npm audit` to identify and address vulnerabilities in third-party packages.
+  - Ensured that all dependencies are up to date and secure.
+
+### How to Test Your Part
+
+1. **Verify Secure Storage**:
+   - Test the storing and retrieval of API keys using the implemented functions to ensure they operate securely.
+
+2. **Test Input Validation**:
+   - Validate that user inputs are correctly sanitized and invalid inputs are handled gracefully.
+
+3. **Check Error Handling**:
+   - Simulate errors in network requests and verify that they are logged and managed without exposing sensitive information.
+
+4. **Assess Access Control**:
+   - Attempt restricted actions with different user roles to confirm that access control mechanisms are effective.
+
+5. **Review Dependencies**:
+   - Run `npm audit` and check for any outstanding vulnerabilities in the dependencies.
+
